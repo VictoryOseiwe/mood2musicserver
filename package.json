@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Get a playlist recommendation based on your mood(s)",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +17,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "pg": "^8.13.2",
     "sequelize": "^6.37.5",
     "validator": "^13.12.0"
