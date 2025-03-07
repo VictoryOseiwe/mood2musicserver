@@ -7,7 +7,7 @@ import env from 'dotenv';
 env.config();
 
 export const createUser = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, username } = req.body;
 
     try {
 
@@ -34,7 +34,8 @@ export const createUser = async (req, res) => {
             firstName,
             lastName,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            username
         })
 
         //Generate JWT token
@@ -61,7 +62,8 @@ export const createUser = async (req, res) => {
                 id: newUser.id,
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
-                email: newUser.email
+                email: newUser.email,
+                username: newUser.username
             }
         })
 

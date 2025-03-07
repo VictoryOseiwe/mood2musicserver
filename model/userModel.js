@@ -17,6 +17,13 @@ export const User = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        userName:{
+            type: DataTypes.STRING,
+            unique: true,
+            validate: {
+                isAlphanumeric: true
+            }
+        },
         email: {
             type: DataTypes.STRING,
             unique: true,

@@ -4,19 +4,18 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
-  username VARCHAR(100) NOT NULL,
+  username VARCHAR(100) UNIQUE NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- MoodLogs Table
+-- Moods Table
 CREATE TABLE moods (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   mood VARCHAR(50) NOT NULL,
-  notes TEXT,
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -24,9 +23,9 @@ CREATE TABLE moods (
 CREATE TABLE playlists (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  mood VARCHAR(50) NOT NULL,
-  playlist_id VARCHAR(255) NOT NULL,  -- Generalized for non-Spotify APIs
-  source VARCHAR(50) DEFAULT 'Spotify',  -- To support multiple APIs (Spotify, Deezer, etc.)
+  mood_id INTEGER REFERENCES moods(id) ON DELETE SET NULL,  -- Reference moods.id instead of moods.mood
+  playlist_id VARCHAR(255) NOT NULL UNIQUE,  -- Ensure playlist_id is unique
+  source VARCHAR(50) DEFAULT 'Spotify' CHECK (source IN ('Spotify', 'Deezer', 'Apple Music', 'YouTube')), -- Case-insensitive sources
   added_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

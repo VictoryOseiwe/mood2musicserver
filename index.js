@@ -3,6 +3,7 @@ import cors from 'cors';
 import env from 'dotenv';
 import authRoute from "./route/authRoute.js"
 import { sequelize } from './config/dbConfig.js';
+import './model/association.js'
 
 env.config();
 
