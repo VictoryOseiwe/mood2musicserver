@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import env from 'dotenv';
 import authRoute from "./route/authRoute.js"
+import moodRoute from './route/moodRoute.js'
+import playlistRoute from './route/playlistRoute.js'
 import { sequelize } from './config/dbConfig.js';
 
 env.config();
@@ -24,6 +26,8 @@ sequelize
     })
 
 app.use("/user", authRoute)
+app.use('/user', moodRoute)
+app.use('/user', playlistRoute)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port http:localhost:${PORT}`);

@@ -1,4 +1,4 @@
-import { Mood } from "../model/moodModel";
+import { Mood } from "../model/moodModel.js";
 
 export const addMood = async (req, res) => {
     const { mood } = req.body; //gets user mood from front end
@@ -27,19 +27,22 @@ export const addMood = async (req, res) => {
 }
 
 export const getMoods = async (req, res) => {
-   const userId = req.user.id
+   const userId = req.user.id //gets user id
    try {
+    //gets users moods
     const allMood = await Mood.findAll({
         where: { user_id: userId },
         order: [["createdAt", 'DESC']]
     })
 
-    if (!allMood){
+    //check if there's no mood available
+    if (allMood.length === 0){
         res.status(404).json({ message: "No mood found for this user."})
     }
 
+    //returns an array of user(s) mood
     res.status(201).json({
-        mood: allMood.mood
+        moods: allMood
     })
    } catch (error) {
     console.error("Error fetching user mood(s)", error)
