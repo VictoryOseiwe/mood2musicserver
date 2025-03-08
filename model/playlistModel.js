@@ -1,5 +1,6 @@
 import { sequelize } from "../config/dbConfig.js";
 import { DataTypes } from "sequelize";
+import { User } from "./userModel.js";
 
 export const Playlist = sequelize.define(
     'Playlist',
@@ -11,11 +12,22 @@ export const Playlist = sequelize.define(
         },
         user_id: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: "users", // Table name, not the model variable
+                key: "id",
+            },
+            onDelete: "CASCADE"
         },
         mood: {
             type: DataTypes.STRING,
             allowNull: false
         }
+    },
+    {
+        tableName: "playlists",
+        timestamps: true,
+        underscored: true,
+        paranoid: true
     }
 )

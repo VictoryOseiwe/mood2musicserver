@@ -3,7 +3,6 @@ import cors from 'cors';
 import env from 'dotenv';
 import authRoute from "./route/authRoute.js"
 import { sequelize } from './config/dbConfig.js';
-import './model/association.js'
 
 env.config();
 
@@ -12,6 +11,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+import './model/association.js'
 
 sequelize
     .sync({ force: false })

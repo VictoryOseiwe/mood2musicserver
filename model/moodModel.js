@@ -1,5 +1,6 @@
 import { sequelize } from "../config/dbConfig.js";
 import { DataTypes } from "sequelize";
+import { User } from "./userModel.js";
 
 export const Mood = sequelize.define(
     'Mood',
@@ -11,7 +12,12 @@ export const Mood = sequelize.define(
         },
         user_id: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: "users", // Table name, not the model variable
+                key: "id",
+            },
+            onDelete: "CASCADE",
         },
         mood: {
             type: DataTypes.STRING,
