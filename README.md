@@ -11,7 +11,7 @@ Before you begin, ensure you have the following installed or configured:
 * **Node.js:** This project is built using pure JavaScript with Express. You'll need Node.js to run the server.
 * **PostgreSQL:** This project uses PostgreSQL as its database.
 
-    * **Note:** The author mentions considering Mongoose as a potential alternative.
+    * **Note:** Don't know how to use PostgreSQL? Consider Using Mongoose as a potential alternative.
 
 **Online Services:**
 
@@ -23,7 +23,7 @@ Before you begin, ensure you have the following installed or configured:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/VictoryOseiwe/mood2musicserver.git
     ```
 2.  **Install Dependencies:**
     ```bash
