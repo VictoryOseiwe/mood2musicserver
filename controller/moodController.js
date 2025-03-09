@@ -4,7 +4,7 @@ export const addMood = async (req, res) => {
     const { mood } = req.body; //gets user mood from front end
 
     try {
-        const userId = req.user.id; // gets current user id
+        const userId = req.user?.userId; // gets current user id
 
         //checks if user is authenticated
         if(!userId){
@@ -27,7 +27,7 @@ export const addMood = async (req, res) => {
 }
 
 export const getMoods = async (req, res) => {
-   const userId = req.user.id //gets user id
+   const userId = req.user?.userId //gets user id
    try {
     //gets users moods
     const allMood = await Mood.findAll({

@@ -23,7 +23,7 @@ const getSpotifyAccessToken = async () => {
 
 // Get music recommendation and save it to DB
 export const recommendMusic = async (req, res) => {
-    const userId = req.user.id;
+    const userId = req.user?.userId;
     try {
         // Get the latest mood of the user
         const latestMood = await Mood.findOne({
