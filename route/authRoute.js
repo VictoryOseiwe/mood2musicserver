@@ -1,18 +1,23 @@
-import express from 'express';
-import { createUser, logUserIn, logUserOut, workingBackend } from '../controller/userController.js';
+import express from "express";
+import {
+  createUser,
+  logUserIn,
+  logUserOut,
+  workingBackend,
+} from "../controller/userController.js";
 
 const router = express.Router();
 
 // Create a new user
-router.post('/register', createUser);
+router.post("/register", createUser);
 
 // Log in existing user
-router.post('/login', logUserIn);
+router.post("/login", logUserIn);
 
 // Log out current user
-router.get('/logout', logUserOut);
+router.get("/logout", logUserOut);
 
 //For testing my backend
-router.get('/', workingBackend)
+router.get("/", workingBackend);
 
 export default router;
