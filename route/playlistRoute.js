@@ -1,9 +1,9 @@
-import express from 'express';
-import { userAuthMiddleware } from '../middleware/userAuthMiddleware.js'
-import { recommendMusic } from '../controller/playlistController.js';
+import express from "express";
+import { recommendMusic } from "../controller/playlistController.js";
+import { verifyToken } from "../middleware/userAuthMiddleware.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/recommendedplaylist", userAuthMiddleware, recommendMusic)
+router.get("/recommendedplaylist", verifyToken, recommendMusic);
 
-export default router
+export default router;

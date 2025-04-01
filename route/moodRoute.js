@@ -1,10 +1,10 @@
-import express from 'express';
-import { userAuthMiddleware } from '../middleware/userAuthMiddleware.js'
-import { addMood, getMoods } from '../controller/moodController.js';
+import express from "express";
+import { addMood, getMoods } from "../controller/moodController.js";
+import { verifyToken } from "../middleware/userAuthMiddleware.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/addmood', userAuthMiddleware, addMood)
-router.get('/getmood', userAuthMiddleware, getMoods)
+router.post("/addmood", verifyToken, addMood);
+router.get("/getmood", verifyToken, getMoods);
 
-export default router
+export default router;
