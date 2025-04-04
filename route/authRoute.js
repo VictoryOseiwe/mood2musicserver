@@ -4,6 +4,7 @@ import {
   logUserIn,
   logUserOut,
   workingBackend,
+  getUserName,
 } from "../controller/userController.js";
 import { verifyToken } from "../middleware/userAuthMiddleware.js";
 
@@ -28,5 +29,7 @@ router.get("/me", verifyToken, (req, res) => {
     user: req.user,
   });
 });
+
+router.get("/userName", verifyToken, getUserName);
 
 export default router;

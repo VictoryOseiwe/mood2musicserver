@@ -7,7 +7,7 @@ import env from "dotenv";
 env.config();
 
 export const createUser = async (req, res) => {
-  const { firstName, lastName, email, password, username } = req.body;
+  const { firstName, lastName, email, password, userName } = req.body;
 
   try {
     // validate email
@@ -38,7 +38,7 @@ export const createUser = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
-      username,
+      userName,
     });
 
     //Generate JWT token
@@ -64,7 +64,7 @@ export const createUser = async (req, res) => {
         firstName: newUser.firstName,
         lastName: newUser.lastName,
         email: newUser.email,
-        username: newUser.username,
+        userName: newUser.userName,
       },
     });
   } catch (error) {
@@ -120,6 +120,7 @@ export const logUserIn = async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        userName: user.userName,
       },
     });
   } catch (error) {
@@ -138,4 +139,20 @@ export const logUserOut = (req, res) => {
 
 export const workingBackend = (req, res) => {
   res.status(200).json({ message: "API is bafadfasdrunning" });
+};
+
+export const getUserName = async (req, res) => {
+  try {
+    const userId = req?.user?.id;
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ userName: user.userName });
+  } catch (error) {
+    console.error("Error fetching user info " + error);
+  }
 };

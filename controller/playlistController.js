@@ -92,3 +92,24 @@ export const recommendMusic = async (req, res) => {
       .json({ message: "Error fetching playlist recommendations" });
   }
 };
+
+export const getPlayListsFromDb = async (req, res) => {
+  const userId = req?.user?.id;
+
+  try {
+    const allPlaylists = await Playlist.findAll({
+      where: { user_id: userId },
+      order: [["createdAt", "DESC"]],
+    });
+
+    res.status(201).json({
+      message: "Playlists Fetched successfully",
+      allPlaylists: {
+        name: allPlaylists?.playlist_name,
+        url: allPlaylists?.playlist_url,
+        image: allPlaylists?.playlist_image,
+        playlistMood: allPlaylists?.mood,
+      },
+    });
+  } catch (error) {}
+};
