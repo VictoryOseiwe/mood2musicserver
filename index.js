@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
+    origin: "https://mood2musi.vercel.app",
     credentials: true,
     optionSuccessStatus: 200,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // allow methods other than GET for cross-origin requests
