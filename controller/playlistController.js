@@ -93,6 +93,27 @@ export const recommendMusic = async (req, res) => {
   }
 };
 
+// export const getPlayListsFromDb = async (req, res) => {
+//   const userId = req?.user?.id;
+
+//   try {
+//     const allPlaylists = await Playlist.findAll({
+//       where: { user_id: userId },
+//       order: [["createdAt", "DESC"]],
+//     });
+
+//     res.status(201).json({
+//       message: "Playlists Fetched successfully",
+//       allPlaylists: {
+//         name: allPlaylists?.playlist_name,
+//         url: allPlaylists?.playlist_url,
+//         image: allPlaylists?.playlist_image,
+//         playlistMood: allPlaylists?.mood,
+//       },
+//     });
+//   } catch (error) {}
+// };
+
 export const getPlayListsFromDb = async (req, res) => {
   const userId = req?.user?.id;
 
@@ -102,14 +123,19 @@ export const getPlayListsFromDb = async (req, res) => {
       order: [["createdAt", "DESC"]],
     });
 
-    res.status(201).json({
-      message: "Playlists Fetched successfully",
-      allPlaylists: {
-        name: allPlaylists?.playlist_name,
-        url: allPlaylists?.playlist_url,
-        image: allPlaylists?.playlist_image,
-        playlistMood: allPlaylists?.mood,
-      },
+    const formattedPlaylists = allPlaylists.map((playlist) => ({
+      name: playlist.playlist_name,
+      url: playlist.playlist_url,
+      image: playlist.playlist_image,
+      playlistMood: playlist.mood,
+    }));
+
+    res.status(200).json({
+      message: "Playlists fetched successfully",
+      allPlaylists: formattedPlaylists,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error fetching playlists:", error);
+    res.status(500).json({ error: "Failed to fetch playlists" });
+  }
 };
