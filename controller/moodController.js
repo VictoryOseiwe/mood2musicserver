@@ -39,11 +39,11 @@ export const getMoods = async (req, res) => {
 
     //check if there's no mood available
     if (allMood.length === 0) {
-      res.status(404).json({ message: "No mood found for this user." });
+      return res.status(404).json({ message: "No mood found for this user." });
     }
 
     //returns an array of user(s) mood
-    res.status(201).json({
+    return res.status(201).json({
       moods: allMood,
     });
   } catch (error) {
