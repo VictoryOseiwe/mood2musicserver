@@ -50,7 +50,7 @@ export const createUser = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Ensure it's secure in production
-      sameSite: "Lax",
+      sameSite: "None",
       maxAge: 3 * 60 * 60 * 1000, // 3 hours,
       path: "/",
     });
@@ -106,7 +106,7 @@ export const logUserIn = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Ensure it's secure in production
-      sameSite: "Lax",
+      sameSite: "None",
       maxAge: 3 * 60 * 60 * 1000, // 3 hours
       path: "/", // Only send cookie to the root path
     });
